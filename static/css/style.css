@@ -168,14 +168,19 @@ body {
 /* MOBILE */
 @media (max-width: 768px) {
   .nav-links {
-    position: absolute;
-    top: 70px;
+    position: fixed;        /* 🔥 important */
+    top: 0;
     right: -100%;
-    background: black;
+    width: 100%;            /* ✅ full width */
+    height: 30vh;          /* ✅ full height */
+    background: rgba(0,0,0,0.95);
+    
+    display: flex;
     flex-direction: column;
-    width: 200px;
-    padding: 20px;
-    transition: 0.3s;
+    align-items: center;    /* center items */
+    justify-content: center;
+
+    transition: 0.3s ease;
   }
 
   .nav-links.show {
