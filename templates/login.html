@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login – Fitness Nation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --yellow: #FFD700;
+      --orange: #FFA500;
+      --black: #000000;
+      --dark: #0f0f0f;
+      --card: #161616;
+      --border: #2a2a2a;
+      --text: #ffffff;
+      --gray: #AAAAAA;
+    }
+    body {
+      background: var(--dark);
+      font-family: 'Barlow', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,215,0,0.06) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,215,0,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,215,0,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .login-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+    }
+    .login-logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .login-logo .logo-icon { font-size: 2.5rem; }
+    .login-logo h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--text);
+      letter-spacing: 3px;
+    }
+    .login-logo h1 span { color: var(--yellow); }
+    .login-logo p {
+      color: var(--gray);
+      font-size: 0.85rem;
+      margin-top: 4px;
+      letter-spacing: 2px;
+    }
+    .login-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .login-card h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .login-card p {
+      color: var(--gray);
+      font-size: 0.85rem;
+      margin-bottom: 28px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gray);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .form-group input {
+      width: 100%;
+      background: #1e1e1e;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: 'Barlow', sans-serif;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus {
+      border-color: var(--yellow);
+    }
+    .error-msg {
+      background: rgba(255, 60, 60, 0.1);
+      border: 1px solid rgba(255, 60, 60, 0.3);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: #ff6b6b;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+    .btn-login {
+      width: 100%;
+      background: var(--yellow);
+      color: var(--black);
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Barlow', sans-serif;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-login:hover { background: var(--orange); }
+    .btn-login:active { transform: scale(0.98); }
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .back-link a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .back-link a:hover { color: var(--yellow); }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="login-wrapper">
+    <div class="login-logo">
+      <div class="logo-icon">⚡</div>
+      <h1>FITNESS <span>NATION</span></h1>
+      <p>ADMIN PORTAL</p>
+    </div>
+    <div class="login-card">
+      <h2>Welcome Back</h2>
+      <p>Sign in to access the admin dashboard</p>
+      {% if error %}
+      <div class="error-msg">⚠ {{ error }}</div>
+      {% endif %}
+      <form method="POST" action="/login">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" name="username" placeholder="Enter username" required autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter password" required />
+        </div>
+        <button type="submit" class="btn-login">SIGN IN →</button>
+      </form>
+    </div>
+    <div class="back-link">
+      <a href="/">← Back to Website</a>
+    </div>
+  </div>
+</body>
+</html>
